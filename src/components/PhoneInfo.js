@@ -28,18 +28,25 @@ class PhoneInfo extends Component {
     const {info, onRemove } = this.props;
     onRemove(info.id);
   }
-  handleRevise = (e) => {
+  /*handleRevise = () => {
     this.setState({
       editing: true
-    })
+    });
+  }*/
+  handleToggleEdit = () => {//handleRevise와 handleSubmit => handleToggleEdit와 componentDidUpdate
+    const { editing } = this.state;
+    this.setState({
+      editing: !editing
+    });
   }
   handleChange = (e) => {
+    const { name, value } = e.target;
     this.setState({
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
-  handleSubmit = (e) => {
-    const {info, onRemove, onUpdate} = this.props;
+  /*handleSubmit = (e) => {
+    const {info, onUpdate} = this.props;
     let data = {};
     if(!this.state.name && this.state.phone){
       data = {
@@ -65,12 +72,34 @@ class PhoneInfo extends Component {
 
     onUpdate(info.id,data);
 
-    //초기화
+    //초기화 -> toggle로 처리
     this.setState({
       name: '',
       phone: '',
       editing: false
     })
+  }*/
+  componentDidUpdate(prevProps, prevState) {
+    //API. 컴포넌트에서 render 호출하고 난 다음 실행됨
+    const { info, onUpdate } = this.props;
+
+    if(!prevState.editing && this.state.editing){//수정등록 클릭했을 때
+      this.setState({
+        name: info.name,
+        phone: info.phone
+      })
+    }
+
+    if(prevState.editing && !this.state.editing){//수정완료 클릭했을 때
+      this.setState({
+         name: this.state.name,
+         phone: this.state.phone
+      })
+      onUpdate(info.id,{
+        name: this.state.name,
+        phone: this.state.phone
+      })
+    }
   }
 
   render() {
@@ -79,11 +108,10 @@ class PhoneInfo extends Component {
       padding: '8px',
       margin: '8px'
     };
-    const {//비구조화 할당
-      id, name, phone
-    } = this.props.info;
 
-    if(this.state.editing){
+    const { editing } = this.state;
+
+    if(editing){
       return (
         <div style={style}>
           <div>
@@ -103,16 +131,23 @@ class PhoneInfo extends Component {
             />
           </div>
           <button onClick={this.handleRemove}>삭제</button>
-          <button onClick={this.handleSubmit}>수정완료</button>
+          <button onClick={this.handleToggleEdit}>수정완료</button>
+          {/*<button onClick={this.handleSubmit}>수정완료</button>*/}
         </div>
       )
     }
+
+    const {//비구조화 할당
+      id, name, phone
+    } = this.props.info;
+
     return (
       <div style={style}>
         <div><b>{name}</b></div>
         <div>{phone}</div>
         <button onClick={this.handleRemove}>삭제</button>
-        <button onClick={this.handleRevise}>수정등록</button>
+        <button onClick={this.handleToggleEdit}>수정등록</button>
+        {/*<button onClick={this.handleRevise}>수정등록</button>*/}
       </div>
     );
   }
