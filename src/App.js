@@ -2,13 +2,20 @@
 //https://velopert.com/3636
 
 /*중앙관리자(갑)역할
+[Client 정보 등록]
 1.PhoneForm에게 client로부터 들어온 정보 받을 바구니(onCreate) 넘기기
 2.PhoneForm이 보낸 바구니에 담긴 정보를 information배열에 추가
+[정보전체 rendring]
 3.PhoneInfoList에게 현재 information배열을 넘겨서 박스list로 만들어주라고 주문하기
 4.PhoneInfoList에게 박스list 받으면 화면에 표시하기
+[정보 삭제]
 5.PhoneInfoList에게 삭제할 id 담을 바구니(onRemvoe) 넘기기
 6.PhoneInfoList가 보낸 삭제할 id 정보로 information filtering 수행
+[정보 수정]
+7.PhoneInfoList에게 수정할 id와 data 담은 바구니(onUpdate) 넘기기
+8.PhoneInfoList가 보낸 수정할 id, data 정보로 information mapping 수행
 */
+
 import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
 import PhoneInfoList from './components/PhoneInfoList';
@@ -46,6 +53,16 @@ class App extends Component {
       information: information.filter( info => info.id !== id )
     })
   }
+  handleUpdate = (id, data) => {
+    const {information } = this.state;
+    this.setState({
+      information: information.map(
+        info => info.id === id
+          ? {...info, ...data} //merge obj via spread syntax
+          : info
+      )
+    })
+  }
   render() {
     const { information } = this.state;
     /* information 보여주는 일을 PhoneInfoList 컴포넌트에게 할당 */
@@ -57,6 +74,7 @@ class App extends Component {
         <PhoneInfoList
           data={information}
           onRemove={this.handleRemove}
+          onUpdate={this.handleUpdate}
           />
       </div>
     );

@@ -1,4 +1,5 @@
 /*일꾼(을1)역할
+[Client 정보 등록]
 1.client input창을 화면에 띄우고 input event를 처리
 2.client가 submit하면 객체로 만들어진  input 정보를 부모컴포넌트(App)에게 반환
 */
@@ -16,7 +17,7 @@ class PhoneForm extends Component {
     })
   }
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();//form tag에서 submit발생시 패이지 리로딩 방지
 
     //부모컴포에 정보 전달하기
     //1.부모컴포(App)에서 메소드(handleCreate)를 만들기

@@ -1,7 +1,12 @@
 /*일꾼(을2)역할
+[정보전체 rendering]
 1.information 배열 전체를 App으로부터 받아와서 박스list로 가공하여 반환
+[정보 박싱]
 2.information 배열 내의 객체 1개씩을 PhoneInfo에 넘겨서 박스로 만들게 시키기
+[정보 삭제]
 3.App에게 받은 onRemove 바구니를 PhoneInfo에게 넘기고 id 담게하여 회수하면 App에게 다시 주기
+[정보 수정]
+4.App에게 받은 onUpdate 바구니를 PhoneInfo에게 넘기고 id, data 담게하여 회수하면 App에게 다시 주기
 */
 
 import React, { Component } from 'react';
@@ -10,11 +15,12 @@ import PhoneInfo from './PhoneInfo';
 class PhoneInfoList extends Component {
   static defaultProps = {
     data: [],
-    onRevmoe: () => console.warn('onRemove not defined')
+    onRevmoe: () => console.warn('onRemove not defined'),
+    onUpdate: () => console.warn('onUpdate not defined'),
   }
 
   render() {
-    const { data, onRemove } = this.props;//App의 state.information : [{},{},...]
+    const { data, onRemove, onUpdate } = this.props;//App의 state.information : [{},{},...]
     const list = data.map(
       //고유값을 꼭 key로 사용해야 한다. 기본 index로 배정할 시 중간에 정보가 추가될 때 문제
       info => (
@@ -22,6 +28,7 @@ class PhoneInfoList extends Component {
           key={info.id}
           info={info}
           onRemove={onRemove}
+          onUpdate={onUpdate}
         />
       )
       /* key가 없다면?
