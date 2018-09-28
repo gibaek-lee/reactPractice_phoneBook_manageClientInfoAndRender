@@ -5,7 +5,9 @@
 1.PhoneForm에게 client로부터 들어온 정보 받을 바구니(onCreate) 넘기기
 2.PhoneForm이 보낸 바구니에 담긴 정보를 information배열에 추가
 3.PhoneInfoList에게 현재 information배열을 넘겨서 박스list로 만들어주라고 주문하기
-4.PhonInfoList에게 박스list 받으면 화면에 표시하기
+4.PhoneInfoList에게 박스list 받으면 화면에 표시하기
+5.PhoneInfoList에게 삭제할 id 담을 바구니(onRemvoe) 넘기기
+6.PhoneInfoList가 보낸 삭제할 id 정보로 information filtering 수행
 */
 import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
@@ -38,12 +40,24 @@ class App extends Component {
       */
     })
   }
+  handleRemove = (id) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.filter( info => info.id !== id )
+    })
+  }
   render() {
+    const { information } = this.state;
     /* information 보여주는 일을 PhoneInfoList 컴포넌트에게 할당 */
     return (
       <div>
-        <PhoneForm onCreate={this.handleCreate}/>
-        <PhoneInfoList data={this.state.information}/>
+        <PhoneForm
+          onCreate={this.handleCreate}
+        />
+        <PhoneInfoList
+          data={information}
+          onRemove={this.handleRemove}
+          />
       </div>
     );
 
