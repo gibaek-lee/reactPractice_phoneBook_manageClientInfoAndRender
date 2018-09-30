@@ -73,7 +73,7 @@ Phonebook, from 'Client input state management' to 'Components update optimizati
 - Props are conveyed data from the parent component
 - A state is local data of the component
 - A component does rerendering when props or state is changed
-- Set a logic before or after component mount, update, and unmount, or can prevent rerendering via LifeCycle API
+- Set a logic before or after component mount, update, and unmount, or prevent rerendering via [LifeCycle API](https://velopert.com/3631)
 
 ## Reference
 React tutorial - Velopert Blog [누구든지 하는 리액트](https://velopert.com/3613)
