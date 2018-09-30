@@ -6,6 +6,8 @@
 [client 수정요청 등록]
 3.client에게 수정 정보 수집하기
 4.PhoneInfoList에게 받은 onUpdate 바구니에 client 요청에 의해 수정된 id, data를 담아 보내기
+[컴포넌트 리렌더링 최적화]
+5.edit 상태가 아니고, PhoneInfoList에게 이전/이후에 받은 info를 비교하여 다르면 rendering 수행, 같으면 수행하지 않음
 */
 
 import React, { Component } from 'react'

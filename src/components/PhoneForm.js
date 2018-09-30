@@ -1,5 +1,5 @@
 /*일꾼(을1)역할
-[Client 정보 등록]
+[Client 정보 등록 요청 처리]
 1.client input창을 화면에 띄우고 input event를 처리
 2.client가 submit하면 객체로 만들어진  input 정보를 부모컴포넌트(App)에게 반환
 */

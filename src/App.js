@@ -20,6 +20,9 @@ https://velopert.com/3640
 [정보 수정]
 7.PhoneInfoList에게 수정할 id와 data 담은 바구니(onUpdate) 넘기기
 8.PhoneInfoList가 보낸 수정할 id, data 정보로 information mapping 수행
+[client 정보 검색 요청 처리]
+9.client에게 검색할 정보 요청받아서 해당 정보로 information에서 필터링 수행
+10.client 검색 수행 중에 PhoneIfoList에 fintering된 data를 넘긴다.
 */
 
 import React, { Component } from 'react';

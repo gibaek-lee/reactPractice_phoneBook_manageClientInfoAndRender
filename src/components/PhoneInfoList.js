@@ -7,6 +7,8 @@
 3.App에게 받은 onRemove 바구니를 PhoneInfo에게 넘기고 id 담게하여 회수하면 App에게 다시 주기
 [정보 수정]
 4.App에게 받은 onUpdate 바구니를 PhoneInfo에게 넘기고 id, data 담게하여 회수하면 App에게 다시 주기
+[컴포넌트 리렌더링 최적화]
+5.App에게 이전, 이후에 받은 data를 비교하여 다르면 rendering 수행, 같으면 수행하지 않음
 */
 
 import React, { Component } from 'react';
