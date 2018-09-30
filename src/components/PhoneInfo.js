@@ -3,8 +3,9 @@
 1.PhoneInfoList가 넘겨준 info객체 1개를 박싱하여 반환
 [정보 삭제]
 2.PhoneInfoList에게 받은 onRemove 바구니에 사용자 요청에 의해 삭제 버튼이 눌린 정보의 id를 담아 보내기
-[정보 수정]
-3.PhoneInfoList에게 받은 onUpdate 바구니에 사용자 요청에 의해 수정된 id, data를 담아 보내기
+[client 수정요청 등록]
+3.client에게 수정 정보 수집하기
+4.PhoneInfoList에게 받은 onUpdate 바구니에 client 요청에 의해 수정된 id, data를 담아 보내기
 */
 
 import React, { Component } from 'react'
@@ -80,7 +81,7 @@ class PhoneInfo extends Component {
     })
   }*/
   componentDidUpdate(prevProps, prevState) {
-    //API. 컴포넌트에서 render 호출하고 난 다음 실행됨
+    //component API. 컴포넌트에서 render 호출하면 그 다음에 자동으로 실행됨
     const { info, onUpdate } = this.props;
 
     if(!prevState.editing && this.state.editing){//수정등록 클릭했을 때
@@ -102,7 +103,20 @@ class PhoneInfo extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    /* API component 최적화
+    새로운 정보가 아니면 렌더링 하지 않는다.
+    */
+    if( !this.state.editing
+      && !nextState.editing
+      && this.props.info === nextProps.info
+    ) return false
+    return true
+  }
+
   render() {
+    console.log('render PhoneInfo' + this.props.info.id);
+
     const style = {
       border: '1px solid black',
       padding: '8px',
@@ -138,7 +152,7 @@ class PhoneInfo extends Component {
     }
 
     const {//비구조화 할당
-      id, name, phone
+      name, phone
     } = this.props.info;
 
     return (
