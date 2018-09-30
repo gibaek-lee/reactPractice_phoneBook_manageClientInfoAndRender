@@ -1,8 +1,8 @@
 # React Practice(Phone Book)
-Phone book, from 'Client input state management' to 'Components update optimization via LifeCycle API'.
+Phonebook, from 'Client input state management' to 'Components update optimization via LifeCycle API'.
 
 ## Function
-- Manage infomation, name and phone number
+- Manage information, name and phone number
 - Add one person info data
 - Show information
 - Search info data and show it
@@ -70,10 +70,11 @@ Phone book, from 'Client input state management' to 'Components update optimizat
 
 ## Summary
 - Make reusable component
-- Props is conveyed data from parent component
-- State is rocal data of component
-- Component do rerendering when props or state is changed
+- Props are conveyed data from the parent component
+- A state is local data of the component
+- A component does rerendering when props or state is changed
 - Set a logic before or after component mount, update, and unmount, or can prevent rerendering via LifeCycle API
 
 ## Reference
 React tutorial - Velopert Blog [누구든지 하는 리액트](https://velopert.com/3613)
+
