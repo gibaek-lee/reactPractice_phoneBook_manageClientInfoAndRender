@@ -72,6 +72,8 @@ Phonebook, from 'Client input state management' to 'Components update optimizati
 - Make reusable component
 - Props are conveyed data from the parent component
 - A state is local data of the component
+- Must obey the rule of 'state value Immutability'<br>
+: Do not use Javascript built-in funtions like 'push, splice, unshift, pop' which revise array itself, but use 'concat, slice, map, filter' which return new array.
 - A component does rerendering when props or state is changed
 - Set a logic before or after component mount, update, and unmount, or prevent rerendering via [LifeCycle API](https://velopert.com/3631)
 
